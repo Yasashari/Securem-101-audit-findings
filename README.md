@@ -50,6 +50,18 @@
   baseToken or quoteToken can lock the pool by calling deposit() without first transferring any funds to the pool.
 
   Recommendation: Require a minimum deposit amount with non-zero checks
+  
+  ## 9. GenesisGroup.commit overwrites previously-committed values: 
+  The amount stored in the recipient’s committedFGEN balance overwrites any previously-committed value. Additionally, this also allows anyone to commit an
+  amount of “0” to any account, deleting their commitment entirely.
+
+  Recommendation: Ensure the committed amount is added to the existing commitment.
+  
+  ## 10. Purchasing and committing still possible after launch: Even after GenesisGroup.launch has successfully been executed, it is still possible to invoke
+  GenesisGroup.purchase and GenesisGroup.commit.
+
+  Recommendation: Consider adding validation in GenesisGroup.purchase and GenesisGroup.commit to make sure that these functions cannot be called after the
+  launch.
 
 
   
